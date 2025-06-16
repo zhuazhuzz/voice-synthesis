@@ -25,3 +25,5 @@ dist-ssr
 
 # Python
 .venv
+requirements.txt
+weight.json
