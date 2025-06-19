@@ -60,3 +60,9 @@ services:
     stdin_open: true
     tty: true
     restart: unless-stopped
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: tunnel
+    restart: always
+    command: tunnel run --token ${CF_TUNNEL_TOKEN}
