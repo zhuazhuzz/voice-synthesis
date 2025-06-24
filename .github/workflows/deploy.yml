@@ -1,23 +1,36 @@
-name: Frontend Github Pages
+name: Frontend to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+
+permissions:
+  contents: write
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout source
+        uses: actions/checkout@v3
 
-      - name: Install dependencies and build
-        working-directory: root/frontend/synthesis-frontend
-        run: |
-          npm install
-          npm run build
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-      - name: GitHub Pages Deploy
+      - name: Install dependencies
+        working-directory: ./frontend/synthesis-frontend
+        run: npm install
+
+      - name: Build project
+        working-directory: ./frontend/synthesis-frontend
+        run: npm run build
+
+      - name: Deploy GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: root/frontend/synthesis-frontend/build 
+          publish_dir: ./frontend/synthesis-frontend/dist
