@@ -1,0 +1,23 @@
+name: Frontend Github Pages
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies and build
+        working-directory: root/frontend/synthesis-frontend
+        run: |
+          npm install
+          npm run build
+
+      - name: GitHub Pages Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: root/frontend/synthesis-frontend/build 
