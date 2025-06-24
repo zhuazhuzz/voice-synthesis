@@ -1,4 +1,4 @@
-# Logs
+Í# Logs
 logs
 *.log
 npm-debug.log*
@@ -25,5 +25,3 @@ dist-ssr
 
 # Python
 .venv
-requirements.txt
-weight.json
