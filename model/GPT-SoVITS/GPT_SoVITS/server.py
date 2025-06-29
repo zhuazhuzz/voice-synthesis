@@ -78,3 +78,10 @@ def synthesize_audio(target_text: str = Form(...)):
         return {"error": "Inference failed"}
 
     return StreamingResponse(buf, media_type="audio/wav")
+
+
+
+# Check Backend
+@app.get("/health")
+def health():
+    return {'status': 'ok'}
